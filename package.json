@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon --exec \"ts-node\" ./src/server.ts",
     "test": "export NODE_ENV=test && nyc mocha -r ts-node/register --exit ./src/tests/*.test.ts --config .mocharc.json",
-    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "coverage": "nyc npm run test && nyc report --reporter=text-lcov | coveralls --exit",
     "build": "tsc --build tsconfig.json"
   },
   "nyc": {
