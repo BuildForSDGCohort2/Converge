@@ -1,5 +1,5 @@
 import { app, request, expect, BASE_URL } from "./testConfig";
-import { testUser } from "../Utils/testHelpers";
+import { testUser } from "../utils/testHelpers";
 describe("Users", () => {
   describe("POST /api/v1/users/register", () => {
     it("should create user", async () => {
