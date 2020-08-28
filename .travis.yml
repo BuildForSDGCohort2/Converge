@@ -7,6 +7,6 @@ env:
     - COVERALLS_PARALLEL=true
 jobs:
   include:
-    - script: npm test && npm coverage
+    - script: npm test && make coverage
 notifications:
   webhooks: https://coveralls.io/webhook
