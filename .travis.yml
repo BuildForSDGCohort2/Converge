@@ -7,6 +7,6 @@ env:
     - COVERALLS_PARALLEL=true
 jobs:
   include:
-    - script: COVERALLS_FLAG_NAME=test-1 make test-coverage
+    - script: COVERALLS_FLAG_NAME=test-1 make test && coverage
 notifications:
   webhooks: https://coveralls.io/webhook
