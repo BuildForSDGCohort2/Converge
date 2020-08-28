@@ -6,4 +6,4 @@ homeRouter.get("/", (req: Request, res: Response) => {
   prompt.successMessage(res, 200, "Server successfully running");
 });
 
-export { homeRouter };
+export { homeRouter }; 

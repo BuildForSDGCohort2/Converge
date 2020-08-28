@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import { createConn } from "./utils/dbConnection";
 import { homeRouter } from "./routes/index";
+import { userRouter } from "./routes/usersRoute";
 import { BASE_URL } from "./utils/constants";
 class App {
   public app: express.Application;
@@ -21,6 +22,7 @@ class App {
     this.app.use(cookieParser());
     this.app.use(bodyParser.urlencoded({ extended: false }));
     this.app.use(BASE_URL, homeRouter);
+    this.app.use(BASE_URL, userRouter);
     this.app.use(cors());
   }
 }
