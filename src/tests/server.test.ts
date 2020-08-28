@@ -1,5 +1,6 @@
 import { app, request, expect, BASE_URL } from "./testConfig";
 
+
 describe("Server", () => {
   describe("GET /", () => {
     it("should be running", async () => {
