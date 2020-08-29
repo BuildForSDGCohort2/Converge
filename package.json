@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "nodemon --exec \"ts-node\" ./src/server.ts",
-    "test": "set NODE_ENV=test && nyc mocha -r ts-node/register --exit ./src/tests/*.test.ts --config .mocharc.json",
+    "test": "export NODE_ENV=test && nyc mocha -r ts-node/register --exit ./src/tests/*.test.ts --config .mocharc.json",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "build": "tsc --build tsconfig.json"
   },
@@ -33,6 +33,8 @@
     "url": "https://github.com/BuildForSDGCohort2/Converge"
   },
   "dependencies": {
+    "@types/bcrypt": "^3.0.0",
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.4",
     "cors": "^2.8.5",

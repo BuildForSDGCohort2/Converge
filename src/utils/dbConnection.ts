@@ -3,7 +3,7 @@ import { createConnection } from "typeorm";
 const config = require("./config");
 export const createConn = async () => {
   try {
-    if (config.NODE_ENV === "test") {
+    if (config.NODE_ENV === "development") {
       return createConnection({
         type: config.DB_TYPE,
         host: config.HOST,
