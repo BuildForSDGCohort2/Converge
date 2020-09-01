@@ -92,6 +92,20 @@ export async function updateUser(
   }
 }
 
+export async function deleteUser(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  try {
+    const id = req.params.id;
+    const user = await getRepository(User).delete(id);
+    res.status(200).send({ status: 200, message: "OK", user: user });
+  } catch (error) {
+    next(error);
+  }
+}
+
 function createToken(user: UserInterface): TokenData {
   const expiresIn = 60 * 60;
   const secret = config.SECRET_KEY;
