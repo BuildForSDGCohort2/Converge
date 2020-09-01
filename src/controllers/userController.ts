@@ -63,6 +63,19 @@ export async function login (
   }
 }
 
+export async function getUsers(
+  _req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  try {
+    const users = await getRepository(User).find();
+    res.status(200).send({ status: 200, message: "OK", users: users });
+  } catch (error) {
+    next(error);
+  }
+}
+
 function createToken(user: UserInterface): TokenData {
   const expiresIn = 60 * 60;
   const secret = config.SECRET_KEY;
