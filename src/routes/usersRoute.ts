@@ -3,7 +3,8 @@ import {
     login,
     getUser,
     getUsers,
-    updateUser
+    updateUser,
+    deleteUser
 } from "../controllers/userController";
 import authMiddleware from "../middleware/authMiddleware";
 import { Router } from "express";
@@ -14,6 +15,7 @@ userRouter.post("/users/login",login);
 userRouter.get("/users/:id", authMiddleware, getUser);
 userRouter.get("/users", authMiddleware, getUsers);
 userRouter.patch("/users/:id", authMiddleware, updateUser);
+userRouter.delete("/users/:id", authMiddleware, deleteUser);
 
 export { userRouter };
   
