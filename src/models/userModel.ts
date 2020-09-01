@@ -15,6 +15,15 @@ class User {
   public email: string;
 
   @Column()
+  public gender: string;
+
+  @Column()
+  public country: string;
+  
+  @Column()
+  public dateOfBirth: number;
+
+  @Column()
   public password: string;
 }
 
