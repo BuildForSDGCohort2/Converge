@@ -1,5 +1,5 @@
 import { app, request, expect, BASE_URL } from "./testConfig";
-import { testUser } from "../utils/testHelpers";
+import { testUser, testUserUpdate } from "../utils/testHelpers";
 describe("Users", () => {
   describe("POST /api/v1/users/register", () => {
     it("should create user", async () => {
@@ -62,6 +62,21 @@ describe("Users", () => {
         expect(body).to.have.property("firstName");
         expect(body).to.have.property("lastName");
         expect(body).to.have.property("email");
+      } catch (error) {}
+    });
+  });
+
+  describe("PATCH /api/v1/users/id", () => {
+    it("should update details of a specific user by id", async () => {
+      try {
+        let { body } = await request(app)
+          .patch(`${BASE_URL}/users/1`)
+          .set("Accept", "application/json");
+
+        /** Tests */
+        expect(body).to.have.property("firstName", testUserUpdate.firstName);
+        expect(body).to.have.property("lastName", testUserUpdate.lastName);
+        expect(body).to.have.property("email", testUserUpdate.email);
       } catch (error) {}
     });
   });
