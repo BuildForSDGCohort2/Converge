@@ -4,9 +4,9 @@
   "description": "This repo serves as the backend for Converge.",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon --exec \"ts-node\" ./src/server.ts",
-    "test": "export NODE_ENV=test && nyc mocha -r ts-node/register --exit ./src/tests/*.test.ts --config .mocharc.json",
-    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "start": "nodemon --exec \"ts-node\" ./dist/server.js",
+    "test": "set NODE_ENV=test && mocha ./dist/tests/*.test.js --config .mocharc.json --exit",
+    "coverage": "nyc npm run test && nyc report --reporter=text-lcov | coveralls --exit",
     "build": "tsc --build tsconfig.json"
   },
   "nyc": {
@@ -37,6 +37,8 @@
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.4",
+    "class-transformer": "^0.2.3",
+    "class-validator": "^0.11.1",
     "cors": "^2.8.5",
     "dotenv-safe": "^8.2.0",
     "express": "^4.17.1",

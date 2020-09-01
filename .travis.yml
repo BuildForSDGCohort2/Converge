@@ -1,0 +1,12 @@
+sudo: false
+language: node_js
+node_js:
+  - "node"
+env:
+  global:
+    - COVERALLS_PARALLEL=true
+jobs:
+  include:
+    - script: npm test && make coverage
+notifications:
+  webhooks: https://coveralls.io/webhook

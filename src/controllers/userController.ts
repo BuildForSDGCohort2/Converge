@@ -53,6 +53,59 @@ export async function login (
   }
  }
 
+ export async function getUser(req: Request, res: Response, next: NextFunction) {
+  try {
+    const id = req.params.id;
+    const user = await getRepository(User).findOne(id);
+    res.status(200).send({ status: 200, message: "OK", user: user });
+  } catch (error) {
+    next(error);
+  }
+}
+
+export async function getUsers(
+  _req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  try {
+    const users = await getRepository(User).find();
+    res.status(200).send({ status: 200, message: "OK", users: users });
+  } catch (error) {
+    next(error);
+  }
+}
+
+export async function updateUser(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  try {
+    const id = req.params.id;
+    const data = req.body;
+    const user = await getRepository(User).update(id, { ...data });
+    user["password"] = undefined;
+    res.status(200).send({ status: 200, message: "OK", user: user });
+  } catch (error) {
+    next(error);
+  }
+}
+
+export async function deleteUser(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  try {
+    const id = req.params.id;
+    const user = await getRepository(User).delete(id);
+    res.status(200).send({ status: 200, message: "OK", user: user });
+  } catch (error) {
+    next(error);
+  }
+}
+
 function createToken(user: UserInterface): TokenData {
   const expiresIn = 60 * 60;
   const secret = config.SECRET_KEY;
@@ -71,21 +124,3 @@ function createCookie(res, data: TokenData) {
     httpOnly: true
   });
 }
-
-// function createToken(user){
-//   const email = user.email;
-//   const secret =  config.SECRET_KEY;
-//   const expiresIn = 60 * 60;
-//   const tokenData = {
-//     expiresIn,
-//     token:jwt.sign( email, secret, expiresIn)};
-//   return tokenData;
-// }
-
-// function createCookie(res, tokenData){
-//   return res.cookie("token", tokenData.token, {
-//     expiresOn: new Date(Date.now() + tokenData.expiresIn),
-//     secure: false,
-//     httpOnly: true
-//   });
-// }
