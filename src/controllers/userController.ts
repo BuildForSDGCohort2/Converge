@@ -76,6 +76,22 @@ export async function getUsers(
   }
 }
 
+export async function updateUser(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  try {
+    const id = req.params.id;
+    const data = req.body;
+    const user = await getRepository(User).update(id, { ...data });
+    user["password"] = undefined;
+    res.status(200).send({ status: 200, message: "OK", user: user });
+  } catch (error) {
+    next(error);
+  }
+}
+
 function createToken(user: UserInterface): TokenData {
   const expiresIn = 60 * 60;
   const secret = config.SECRET_KEY;
