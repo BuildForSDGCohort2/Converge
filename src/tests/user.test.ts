@@ -49,4 +49,20 @@ describe("Users", () => {
       } catch (error) {}
     });
   });
+
+  describe("GET /api/v1/users", () => {
+    it("should retrieve all users", async () => {
+      try {
+        let { body } = await request(app)
+          .get(`${BASE_URL}/users`)
+          .set("Accept", "application/json");
+
+        /** Tests */
+        expect(body.status).to.eql(200);
+        expect(body).to.have.property("firstName");
+        expect(body).to.have.property("lastName");
+        expect(body).to.have.property("email");
+      } catch (error) {}
+    });
+  });
 });
