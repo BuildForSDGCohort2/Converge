@@ -1,11 +1,10 @@
 const express = require('express');
-const app = exress;
+const app = express();
 
-//iimport routes 
+//import routes 
 const authRoutes = require('./routes/auth');
 
 
 //Route middleware
-
 app.use('./api/user',authRoutes)
-app.listen(3000, ()=> console.log(Serving));
+app.listen(3000, ()=> console.log('Serving'));
