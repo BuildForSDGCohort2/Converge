@@ -3,7 +3,8 @@ const router = require('express').Router();
 //import User model
 const User = require("../model/User");
 const { body, validationResult } = require('express-validator');
-
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
 router.post("/register", [
     //name
     body('name').isLength({ min: 6 }).notEmpty(),
@@ -19,11 +20,14 @@ router.post("/register", [
         } else {
             //check is user email already exists
             const emailExist = await User.findOne({ email: req.body.email });
-            if (emailExist) { return res.send("User email exists"); } else {
+            if (emailExist) { return res.send("User email exists"); }
+            else {
+                const salt = await bcrypt.genSalt(10);
+                const hashedPassword = await bcrypt.hash(req.body.password, salt);
                 const user = new User({
                     name: req.body.username,
                     email: req.body.email,
-                    password: req.body.password,
+                    password: hashedPassword,
                 });
                 try {
                     //save new user 
