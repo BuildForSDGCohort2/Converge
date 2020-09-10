@@ -83,7 +83,7 @@ router.post(
               res.send("Wrong password");
           }
           else {
-              const accessTokenSecret = process.env.TOKEN;
+              const accessTokenSecret = process.env.TOKEN_SECRET;
               //create and assign a token 
               const token = jwt.sign({_id:user.id},accessTokenSecret)
              res.header("auth-token",token).send();
