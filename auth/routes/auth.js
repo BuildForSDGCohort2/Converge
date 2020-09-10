@@ -81,7 +81,11 @@ router.post(
               res.send("Wrong password");
           }
           else {
-              res.send("Logged in");
+              const accessTokenSecret = "youraccesstokensecret";
+              //create and assign a token 
+              const token = jwt.sign({_id:user.id},accessTokenSecret)
+             res.header("auth-token",token).send(token);
+            //   res.send("Logged in");
           }
       }
   }
