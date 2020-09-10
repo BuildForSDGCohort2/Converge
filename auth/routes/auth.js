@@ -5,6 +5,8 @@ const User = require("../model/User");
 const { body, validationResult } = require('express-validator');
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const env = require("dotenv").config();
+
 
 
 //register
@@ -81,10 +83,10 @@ router.post(
               res.send("Wrong password");
           }
           else {
-              const accessTokenSecret = "youraccesstokensecret";
+              const accessTokenSecret = process.env.TOKEN;
               //create and assign a token 
               const token = jwt.sign({_id:user.id},accessTokenSecret)
-             res.header("auth-token",token).send(token);
+             res.header("auth-token",token).send();
             //   res.send("Logged in");
           }
       }
